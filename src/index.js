@@ -4,6 +4,7 @@ import { UAParser } from 'ua-parser-js';
 
 import './styles/header.css';
 import './styles/index.css';
+import './styles/loader.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
