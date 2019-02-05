@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import { Header } from './components/header';
 import { Loader } from './components/loader';
+import Workload from './components/workload';
 import { hideLoader, showLoader } from './redux/actions';
 
 class App extends Component {
@@ -26,6 +27,8 @@ class App extends Component {
                 <Loader showLoader={this.props.loaderState} />
 
                 <Header />
+
+                <Workload />
             </div>
         );
     };

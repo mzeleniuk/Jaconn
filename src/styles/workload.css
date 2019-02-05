@@ -1,0 +1,38 @@
+.workload-container {
+    max-width: 500px;
+    border-radius: 4px;
+    box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.15);
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin: 50px auto;
+}
+
+.workload-container .workload-container-header {
+    height: 60px;
+    background-color: #f3f3f3;
+    border-bottom: 3px solid #aea1ea;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.workload-container .workload-container-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.workload-container .workload-container-body {
+    text-align: center;
+    margin: 20px;
+}
+
+.workload-container .workload-container-body p {
+    font-weight: normal;
+}
+
+.workload-container .workload-container-body hr {
+    height: 1px;
+    border: none;
+    flex-shrink: 0;
+    background-color: rgba(0, 0, 0, 0.12);
+}

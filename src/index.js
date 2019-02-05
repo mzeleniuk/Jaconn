@@ -7,6 +7,7 @@ import store from './redux/store';
 import './styles/header.css';
 import './styles/index.css';
 import './styles/loader.css';
+import './styles/workload.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
