@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 import { UAParser } from 'ua-parser-js';
 
 import store from './redux/store';
+import './styles/animations.css';
+import './styles/dropdown.css';
 import './styles/header.css';
 import './styles/index.css';
 import './styles/loader.css';

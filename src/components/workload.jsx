@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+import Dropdown from './dropdown';
 
 const modifiersStyles = {
     today: {
@@ -10,6 +11,8 @@ const modifiersStyles = {
         backgroundColor: '#8c54a1'
     }
 };
+
+const duration = [1, 2, 3, 4, 5, 6];
 
 class Workload extends Component {
     constructor(props) {
@@ -25,6 +28,10 @@ class Workload extends Component {
         this.setState({ shiftStartDate: day });
     };
 
+    handleCountryChange = item => {
+        this.setState({ shiftDuration: item });
+    };
+
     render() {
         return (
             <div className="workload-container">
@@ -33,18 +40,31 @@ class Workload extends Component {
                 </div>
 
                 <div className="workload-container-body">
-                    <p>Select shift's first day</p>
+                    <div className="data-container">
+                        <p>Select shift's first day</p>
 
-                    <hr />
+                        <hr />
 
-                    <DayPicker onDayClick={this.handleDayClick}
-                               selectedDays={this.state.shiftStartDate}
-                               modifiersStyles={modifiersStyles}
-                    />
+                        <DayPicker onDayClick={this.handleDayClick}
+                                   selectedDays={this.state.shiftStartDate}
+                                   modifiersStyles={modifiersStyles}
+                        />
 
-                    {this.state.shiftStartDate ? (
-                        <p>You clicked {this.state.shiftStartDate.toLocaleDateString()}</p>
-                    ) : null}
+                        {this.state.shiftStartDate ? (
+                            <p>You clicked {this.state.shiftStartDate.toLocaleDateString()}</p>
+                        ) : null}
+                    </div>
+
+                    <div className="data-container">
+                        <p>Select shift's duration (days)</p>
+
+                        <hr />
+
+                        <Dropdown list={duration}
+                                  selectedItem={this.state.shiftDuration}
+                                  handleItemSelect={this.handleCountryChange}
+                        />
+                    </div>
                 </div>
             </div>
         );
