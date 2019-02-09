@@ -20,16 +20,38 @@ class Workload extends Component {
 
         this.state = {
             shiftDuration: 3,
-            shiftStartDate: null
+            shiftStartDate: null,
+            validationErrors: {
+                shiftDurationError: false,
+                shiftStartDateError: false
+            }
         };
     };
 
     handleDayClick = day => {
-        this.setState({ shiftStartDate: day });
+        this.setState({
+            shiftStartDate: day,
+            validationErrors: { ...this.state.validationErrors, shiftStartDateError: !day }
+        });
     };
 
-    handleCountryChange = item => {
-        this.setState({ shiftDuration: item });
+    handleItemChange = item => {
+        this.setState({
+            shiftDuration: item,
+            validationErrors: { ...this.state.validationErrors, shiftDurationError: !item }
+        });
+    };
+
+    handleSubmit = () => {
+        if (!this.state.shiftDuration || !this.state.shiftStartDate) {
+            this.setState({
+                validationErrors: {
+                    ...this.state.validationErrors,
+                    shiftDurationError: !this.state.shiftDuration,
+                    shiftStartDateError: !this.state.shiftStartDate
+                }
+            });
+        }
     };
 
     render() {
@@ -49,10 +71,6 @@ class Workload extends Component {
                                    selectedDays={this.state.shiftStartDate}
                                    modifiersStyles={modifiersStyles}
                         />
-
-                        {this.state.shiftStartDate ? (
-                            <p>You clicked {this.state.shiftStartDate.toLocaleDateString()}</p>
-                        ) : null}
                     </div>
 
                     <div className="data-container">
@@ -62,8 +80,32 @@ class Workload extends Component {
 
                         <Dropdown list={duration}
                                   selectedItem={this.state.shiftDuration}
-                                  handleItemSelect={this.handleCountryChange}
+                                  handleItemSelect={this.handleItemChange}
                         />
+                    </div>
+
+                    <div className="data-container">
+                        <p>Summary</p>
+
+                        <hr />
+
+                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                            <span className="white-space-after">Shift's first day:</span>
+
+                            <span className={this.state.validationErrors.shiftStartDateError ? "invalid" : "valid"}>
+                                {this.state.shiftStartDate ? this.state.shiftStartDate.toLocaleDateString() : "not selected"}
+                            </span>
+                        </p>
+
+                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                            <span className="white-space-after">Shift's duration:</span>
+
+                            <span className={this.state.validationErrors.shiftDurationError ? "invalid" : "valid"}>
+                                {this.state.shiftDuration}
+                            </span>
+                        </p>
+
+                        <button onClick={this.handleSubmit}>Submit</button>
                     </div>
                 </div>
             </div>
