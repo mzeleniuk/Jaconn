@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
 import 'react-day-picker/lib/style.css';
+
 import Dropdown from './dropdown';
+import { hideLoader, saveWorkload, showLoader } from '../redux/actions';
 
 const modifiersStyles = {
     today: {
@@ -43,6 +46,8 @@ class Workload extends Component {
     };
 
     handleSubmit = () => {
+        this.props.showLoader();
+
         if (!this.state.shiftDuration || !this.state.shiftStartDate) {
             this.setState({
                 validationErrors: {
@@ -51,7 +56,14 @@ class Workload extends Component {
                     shiftStartDateError: !this.state.shiftStartDate
                 }
             });
+        } else {
+            this.props.saveWorkload({
+                shiftDuration: this.state.shiftDuration,
+                shiftStartDate: this.state.shiftStartDate
+            });
         }
+
+        this.props.hideLoader();
     };
 
     render() {
@@ -113,4 +125,10 @@ class Workload extends Component {
     };
 }
 
-export default Workload;
+const mapDispatchToProps = {
+    hideLoader,
+    saveWorkload,
+    showLoader
+};
+
+export default connect(null, mapDispatchToProps)(Workload);
