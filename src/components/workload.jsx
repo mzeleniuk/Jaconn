@@ -5,6 +5,7 @@ import 'react-day-picker/lib/style.css';
 
 import Dropdown from './dropdown';
 import { hideLoader, saveWorkload, showLoader } from '../redux/actions';
+import { Storage } from '../services/storage';
 
 const modifiersStyles = {
     today: {
@@ -21,14 +22,29 @@ class Workload extends Component {
     constructor(props) {
         super(props);
 
+        const cachedWorkload = Storage.loadWorkload();
+
         this.state = {
-            shiftDuration: 3,
-            shiftStartDate: null,
+            shiftDuration: cachedWorkload ? cachedWorkload.shiftDuration : 3,
+            shiftStartDate: cachedWorkload ? new Date(cachedWorkload.shiftStartDate) : null,
             validationErrors: {
                 shiftDurationError: false,
                 shiftStartDateError: false
             }
         };
+    };
+
+    componentDidMount() {
+        const cachedWorkload = Storage.loadWorkload();
+
+        if (cachedWorkload) {
+            const workload = {
+                shiftDuration: cachedWorkload.shiftDuration,
+                shiftStartDate: new Date(cachedWorkload.shiftStartDate)
+            };
+
+            this.props.saveWorkload(workload);
+        }
     };
 
     handleDayClick = day => {
@@ -57,10 +73,13 @@ class Workload extends Component {
                 }
             });
         } else {
-            this.props.saveWorkload({
+            const workload = {
                 shiftDuration: this.state.shiftDuration,
                 shiftStartDate: this.state.shiftStartDate
-            });
+            };
+
+            this.props.saveWorkload(workload);
+            Storage.saveWorkload(workload);
         }
 
         this.props.hideLoader();
@@ -80,6 +99,7 @@ class Workload extends Component {
                         <hr />
 
                         <DayPicker onDayClick={this.handleDayClick}
+                                   firstDayOfWeek={1}
                                    selectedDays={this.state.shiftStartDate}
                                    modifiersStyles={modifiersStyles}
                         />
