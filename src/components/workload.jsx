@@ -99,6 +99,9 @@ class Workload extends Component {
                         <hr />
 
                         <DayPicker onDayClick={this.handleDayClick}
+                                   months={this.props.dictionary.months}
+                                   weekdaysLong={this.props.dictionary.weekdaysLong}
+                                   weekdaysShort={this.props.dictionary.weekdaysShort}
                                    firstDayOfWeek={1}
                                    selectedDays={this.state.shiftStartDate}
                                    modifiersStyles={modifiersStyles}
@@ -150,11 +153,14 @@ const mapStateToProps = state => {
         dictionary: {
             duration: state.dictionary.data['Duration'],
             firstDay: state.dictionary.data['FirstDay'],
+            months: state.dictionary.data['Months'],
             notSelected: state.dictionary.data['NotSelected'],
             selectDuration: state.dictionary.data['SelectDuration'],
             selectFirstDay: state.dictionary.data['SelectFirstDay'],
             submit: state.dictionary.data['Submit'],
             summary: state.dictionary.data['Summary'],
+            weekdaysLong: state.dictionary.data['WeekdaysLong'],
+            weekdaysShort: state.dictionary.data['WeekdaysShort'],
             workloadSetupHeader: state.dictionary.data['WorkloadSetupHeader']
         }
     };
