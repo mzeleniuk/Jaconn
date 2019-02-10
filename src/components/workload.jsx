@@ -89,12 +89,12 @@ class Workload extends Component {
         return (
             <div className="workload-container">
                 <div className="workload-container-header">
-                    <h2>Workload setup</h2>
+                    <h2>{this.props.dictionary.workloadSetupHeader}</h2>
                 </div>
 
                 <div className="workload-container-body">
                     <div className="data-container">
-                        <p>Select shift's first day</p>
+                        <p>{this.props.dictionary.selectFirstDay}</p>
 
                         <hr />
 
@@ -106,7 +106,7 @@ class Workload extends Component {
                     </div>
 
                     <div className="data-container">
-                        <p>Select shift's duration (days)</p>
+                        <p>{this.props.dictionary.selectDuration}</p>
 
                         <hr />
 
@@ -117,27 +117,27 @@ class Workload extends Component {
                     </div>
 
                     <div className="data-container">
-                        <p>Summary</p>
+                        <p>{this.props.dictionary.summary}</p>
 
                         <hr />
 
                         <p style={{textAlign: "left", marginBottom: "10px"}}>
-                            <span className="white-space-after">Shift's first day:</span>
+                            <span className="white-space-after">{this.props.dictionary.firstDay}:</span>
 
                             <span className={this.state.validationErrors.shiftStartDateError ? "invalid" : "valid"}>
-                                {this.state.shiftStartDate ? this.state.shiftStartDate.toLocaleDateString() : "not selected"}
+                                {this.state.shiftStartDate ? this.state.shiftStartDate.toLocaleDateString() : this.props.dictionary.notSelected}
                             </span>
                         </p>
 
                         <p style={{textAlign: "left", marginBottom: "10px"}}>
-                            <span className="white-space-after">Shift's duration:</span>
+                            <span className="white-space-after">{this.props.dictionary.duration}:</span>
 
                             <span className={this.state.validationErrors.shiftDurationError ? "invalid" : "valid"}>
                                 {this.state.shiftDuration}
                             </span>
                         </p>
 
-                        <button onClick={this.handleSubmit}>Submit</button>
+                        <button onClick={this.handleSubmit}>{this.props.dictionary.submit}</button>
                     </div>
                 </div>
             </div>
@@ -145,10 +145,25 @@ class Workload extends Component {
     };
 }
 
+const mapStateToProps = state => {
+    return {
+        dictionary: {
+            duration: state.dictionary.data['Duration'],
+            firstDay: state.dictionary.data['FirstDay'],
+            notSelected: state.dictionary.data['NotSelected'],
+            selectDuration: state.dictionary.data['SelectDuration'],
+            selectFirstDay: state.dictionary.data['SelectFirstDay'],
+            submit: state.dictionary.data['Submit'],
+            summary: state.dictionary.data['Summary'],
+            workloadSetupHeader: state.dictionary.data['WorkloadSetupHeader']
+        }
+    };
+};
+
 const mapDispatchToProps = {
     hideLoader,
     saveWorkload,
     showLoader
 };
 
-export default connect(null, mapDispatchToProps)(Workload);
+export default connect(mapStateToProps, mapDispatchToProps)(Workload);

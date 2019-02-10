@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Header } from './components/header';
 import { Loader } from './components/loader';
 import Workload from './components/workload';
-import { hideLoader, showLoader } from './redux/actions';
+import { hideLoader, setDictionary, showLoader } from './redux/actions';
 
 class App extends Component {
     constructor(props) {
@@ -16,6 +16,17 @@ class App extends Component {
     };
 
     componentDidMount() {
+        let languageCode = '';
+        const browserLanguage = navigator.language.slice(0, 2);
+
+        if (browserLanguage === 'uk') {
+            languageCode = 'UA';
+        } else {
+            languageCode = 'EN';
+        }
+
+        this.props.setDictionary(languageCode);
+
         this.setState({ initialized: true }, () => {
             this.props.hideLoader();
         });
@@ -42,6 +53,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = {
     hideLoader,
+    setDictionary,
     showLoader
 };
 
