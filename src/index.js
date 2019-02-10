@@ -8,6 +8,7 @@ import './styles/animations.css';
 import './styles/dropdown.css';
 import './styles/header.css';
 import './styles/index.css';
+import './styles/language.css';
 import './styles/loader.css';
 import './styles/workload.css';
 import App from './App';

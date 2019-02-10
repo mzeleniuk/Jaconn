@@ -6,6 +6,14 @@ class Storage {
     static loadWorkload() {
         return JSON.parse(localStorage.getItem('workload'));
     };
+
+    static saveLanguage(language) {
+        localStorage.setItem('language', language);
+    };
+
+    static loadLanguage() {
+        return localStorage.getItem('language');
+    };
 }
 
 export { Storage };

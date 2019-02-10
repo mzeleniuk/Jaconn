@@ -10,4 +10,5 @@ header {
 header img {
     height: 70px;
     width: auto;
+    flex-grow: 1;
 }

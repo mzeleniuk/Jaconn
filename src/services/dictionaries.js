@@ -1,5 +1,6 @@
 class Dictionaries {
     static EN = {
+        Code: 'EN',
         Duration: 'Shift duration (days)',
         FirstDay: 'Shift first day',
         Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
@@ -14,6 +15,7 @@ class Dictionaries {
     };
 
     static UA = {
+        Code: 'UA',
         Duration: 'Тривалість зміни (днів)',
         FirstDay: 'Перший день зміни',
         Months: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'],

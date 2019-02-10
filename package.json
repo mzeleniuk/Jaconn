@@ -1,6 +1,6 @@
 {
   "name": "jaconn",
-  "version": "0.7.1",
+  "version": "0.8.0",
   "private": true,
   "dependencies": {
     "react": "^16.7.0",
