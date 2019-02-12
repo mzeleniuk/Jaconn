@@ -2,9 +2,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { UAParser } from 'ua-parser-js';
+import 'react-day-picker/lib/style.css';
 
 import store from './redux/store';
 import './styles/animations.css';
+import './styles/calendar.css';
 import './styles/dropdown.css';
 import './styles/header.css';
 import './styles/index.css';

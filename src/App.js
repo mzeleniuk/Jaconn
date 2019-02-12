@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
+import Calendar from './components/calendar';
 import { Header } from './components/header';
 import { Loader } from './components/loader';
 import Workload from './components/workload';
@@ -29,6 +30,8 @@ class App extends Component {
                 <Header />
 
                 <Workload />
+
+                <Calendar />
             </div>
         );
     };

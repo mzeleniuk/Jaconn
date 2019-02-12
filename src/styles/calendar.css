@@ -1,0 +1,8 @@
+.calendar-container {
+    width: 100%;
+    text-align: center;
+}
+
+.calendar-container .calendar {
+    padding: 10px;
+}

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
-import 'react-day-picker/lib/style.css';
 
 import Dropdown from './dropdown';
-import { hideLoader, saveWorkload, showLoader } from '../redux/actions';
+import { saveWorkload } from '../redux/actions';
 import { Storage } from '../services/storage';
 
 const modifiersStyles = {
@@ -62,8 +61,6 @@ class Workload extends Component {
     };
 
     handleSubmit = () => {
-        this.props.showLoader();
-
         if (!this.state.shiftDuration || !this.state.shiftStartDate) {
             this.setState({
                 validationErrors: {
@@ -81,8 +78,6 @@ class Workload extends Component {
             this.props.saveWorkload(workload);
             Storage.saveWorkload(workload);
         }
-
-        this.props.hideLoader();
     };
 
     render() {
@@ -103,6 +98,8 @@ class Workload extends Component {
                                    weekdaysLong={this.props.dictionary.weekdaysLong}
                                    weekdaysShort={this.props.dictionary.weekdaysShort}
                                    firstDayOfWeek={1}
+                                   fixedWeeks={true}
+                                   locale={this.props.dictionary.code.toLowerCase()}
                                    selectedDays={this.state.shiftStartDate}
                                    modifiersStyles={modifiersStyles}
                         />
@@ -151,6 +148,7 @@ class Workload extends Component {
 const mapStateToProps = state => {
     return {
         dictionary: {
+            code: state.dictionary.data['Code'],
             duration: state.dictionary.data['Duration'],
             firstDay: state.dictionary.data['FirstDay'],
             months: state.dictionary.data['Months'],
@@ -167,9 +165,7 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToProps = {
-    hideLoader,
-    saveWorkload,
-    showLoader
+    saveWorkload
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Workload);
