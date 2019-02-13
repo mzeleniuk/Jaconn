@@ -12,6 +12,81 @@ const modifiersStyles = {
 };
 
 class Calendar extends PureComponent {
+    calculateWorkingDays = () => {
+        const result = [];
+        const duration = this.props.duration;
+        const startDate = this.props.startDate;
+
+        if (startDate && duration) {
+            const startDayNumberInYear = this.getDayNumberOfYear(startDate);
+            const targetYear = startDate.getFullYear();
+            const daysOfYear = this.getDaysOfYear(targetYear);
+
+            let futureDates = [];
+            let pastDates = [];
+            let mappedFutureDates = [];
+            let mappedPastDates = [];
+
+            for (let k = startDayNumberInYear; k <= daysOfYear; k++) {
+                futureDates.push(k);
+            }
+
+            for (let m = 1; m < startDayNumberInYear; m++) {
+                pastDates.push(m);
+            }
+
+            for (let i = 0, j = 0; i < futureDates.length; i++) {
+                if (j < duration) {
+                    mappedFutureDates.push(futureDates[i]);
+                } else if ( j === (duration * 2 - 1)) {
+                    j = -1;
+                }
+
+                j++;
+            }
+
+            for (let a = pastDates.length - 1, b = 0; a >= 0; a--) {
+                 if (b === (duration * 2)) {
+                    b = 0;
+                } else if (b >= duration) {
+                    mappedPastDates.push(pastDates[a]);
+                }
+
+                b++;
+            }
+
+            for (let c = 0; c < mappedPastDates.length; c++) {
+                result.push(this.getDateFromDay(targetYear, mappedPastDates[c]));
+            }
+
+            for (let d = 0; d < mappedFutureDates.length; d++) {
+                result.push(this.getDateFromDay(targetYear, mappedFutureDates[d]));
+            }
+        }
+
+        return result;
+    };
+
+    getDayNumberOfYear = (date) => {
+        const start = new Date(date.getFullYear(), 0, 0);
+        const diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
+        const oneDay = 1000 * 60 * 60 * 24;
+
+        return Math.floor(diff / oneDay);
+    };
+
+    getDaysOfYear = (year) => {
+        const leapYear = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
+
+        return leapYear ? 366 : 365;
+    };
+
+    getDateFromDay = (year, day) => {
+        const date = new Date(year, 0);
+
+        return new Date(date.setDate(day));
+    };
+
     render() {
         const currentYear = new Date().getFullYear();
         const currentCalendarYear = new Date(currentYear, 0);
@@ -29,6 +104,7 @@ class Calendar extends PureComponent {
                         months={this.props.dictionary.months}
                         weekdaysLong={this.props.dictionary.weekdaysLong}
                         weekdaysShort={this.props.dictionary.weekdaysShort}
+                        selectedDays={this.calculateWorkingDays()}
                         modifiersStyles={modifiersStyles}
                     />
                 </div>
