@@ -68,3 +68,9 @@
     text-shadow: 0 1px rgba(0, 0, 0, 0.3);
     transition: all 100ms ease-in;
 }
+
+@media (max-width: 500px) {
+    .workload-container {
+        margin: 10px;
+    }
+}

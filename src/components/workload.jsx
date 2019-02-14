@@ -76,6 +76,9 @@ class Workload extends Component {
             };
 
             this.props.saveWorkload(workload);
+
+            document.querySelector('.calendar').scrollIntoView({ block: 'start', behavior: 'smooth' });
+
             Storage.saveWorkload(workload);
         }
     };
