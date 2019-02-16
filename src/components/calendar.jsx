@@ -14,10 +14,11 @@ const modifiersStyles = {
 class Calendar extends PureComponent {
     calculateWorkingDays = () => {
         const result = [];
+        const daysOffDuration = this.props.daysOffDuration;
         const duration = this.props.duration;
         const startDate = this.props.startDate;
 
-        if (startDate && duration) {
+        if (daysOffDuration && startDate && duration) {
             const startDayNumberInYear = this.getDayNumberOfYear(startDate);
             const targetYear = startDate.getFullYear();
             const daysOfYear = this.getDaysOfYear(targetYear);
@@ -38,7 +39,7 @@ class Calendar extends PureComponent {
             for (let i = 0, j = 0; i < futureDates.length; i++) {
                 if (j < duration) {
                     mappedFutureDates.push(futureDates[i]);
-                } else if ( j === (duration * 2 - 1)) {
+                } else if (j === (duration + daysOffDuration - 1)) {
                     j = -1;
                 }
 
@@ -46,9 +47,9 @@ class Calendar extends PureComponent {
             }
 
             for (let a = pastDates.length - 1, b = 0; a >= 0; a--) {
-                 if (b === (duration * 2)) {
+                if (b === (duration + daysOffDuration)) {
                     b = 0;
-                } else if (b >= duration) {
+                } else if (b >= daysOffDuration) {
                     mappedPastDates.push(pastDates[a]);
                 }
 
@@ -121,6 +122,7 @@ const mapStateToProps = state => {
             weekdaysLong: state.dictionary.data['WeekdaysLong'],
             weekdaysShort: state.dictionary.data['WeekdaysShort']
         },
+        daysOffDuration: state.workload.data.daysOffDuration,
         duration: state.workload.data.shiftDuration,
         startDate: state.workload.data.shiftStartDate
     };

@@ -1,10 +1,12 @@
 class Dictionaries {
     static EN = {
         Code: 'EN',
-        Duration: 'Shift duration (days)',
-        FirstDay: 'Shift first day',
+        DaysOffDuration: 'Number of days off:',
+        Duration: 'Shift duration (days):',
+        FirstDay: 'Shift first day:',
         Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         NotSelected: 'not selected',
+        SelectDaysOffDuration: 'Select number of days off',
         SelectDuration: "Select shift's duration (days)",
         SelectFirstDay: "Select shift's first day",
         Submit: 'Submit',
@@ -16,10 +18,12 @@ class Dictionaries {
 
     static UA = {
         Code: 'UA',
-        Duration: 'Тривалість зміни (днів)',
-        FirstDay: 'Перший день зміни',
+        DaysOffDuration: 'Кількість вихідних днів:',
+        Duration: 'Тривалість зміни (днів):',
+        FirstDay: 'Перший день зміни:',
         Months: ['Січень', 'Лютий', 'Березень', 'Квітень', 'Травень', 'Червень', 'Липень', 'Серпень', 'Вересень', 'Жовтень', 'Листопад', 'Грудень'],
         NotSelected: 'не обрано',
+        SelectDaysOffDuration: 'Оберіть кількість вихідних днів',
         SelectDuration: 'Оберіть тривалість зміни (днів)',
         SelectFirstDay: 'Оберіть перший день зміни',
         Submit: 'Підтвердити',

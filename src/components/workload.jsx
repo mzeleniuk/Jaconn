@@ -24,9 +24,11 @@ class Workload extends Component {
         const cachedWorkload = Storage.loadWorkload();
 
         this.state = {
+            daysOffDuration: cachedWorkload ? cachedWorkload.daysOffDuration : 3,
             shiftDuration: cachedWorkload ? cachedWorkload.shiftDuration : 3,
             shiftStartDate: cachedWorkload ? new Date(cachedWorkload.shiftStartDate) : null,
             validationErrors: {
+                daysOffDurationError: false,
                 shiftDurationError: false,
                 shiftStartDateError: false
             }
@@ -38,6 +40,7 @@ class Workload extends Component {
 
         if (cachedWorkload) {
             const workload = {
+                daysOffDuration: cachedWorkload.daysOffDuration,
                 shiftDuration: cachedWorkload.shiftDuration,
                 shiftStartDate: new Date(cachedWorkload.shiftStartDate)
             };
@@ -60,17 +63,26 @@ class Workload extends Component {
         });
     };
 
+    handleDaysOffDurationChange = item => {
+        this.setState({
+            daysOffDuration: item,
+            validationErrors: { ...this.state.validationErrors, daysOffDurationError: !item }
+        });
+    };
+
     handleSubmit = () => {
-        if (!this.state.shiftDuration || !this.state.shiftStartDate) {
+        if (!this.state.daysOffDuration || !this.state.shiftDuration || !this.state.shiftStartDate) {
             this.setState({
                 validationErrors: {
                     ...this.state.validationErrors,
+                    daysOffDurationError: !this.state.daysOffDuration,
                     shiftDurationError: !this.state.shiftDuration,
                     shiftStartDateError: !this.state.shiftStartDate
                 }
             });
         } else {
             const workload = {
+                daysOffDuration: this.state.daysOffDuration,
                 shiftDuration: this.state.shiftDuration,
                 shiftStartDate: this.state.shiftStartDate
             };
@@ -120,12 +132,23 @@ class Workload extends Component {
                     </div>
 
                     <div className="data-container">
+                        <p>{this.props.dictionary.selectDaysOffDuration}</p>
+
+                        <hr />
+
+                        <Dropdown list={duration}
+                                  selectedItem={this.state.daysOffDuration}
+                                  handleItemSelect={this.handleDaysOffDurationChange}
+                        />
+                    </div>
+
+                    <div className="data-container">
                         <p>{this.props.dictionary.summary}</p>
 
                         <hr />
 
                         <p style={{textAlign: "left", marginBottom: "10px"}}>
-                            <span className="white-space-after">{this.props.dictionary.firstDay}:</span>
+                            <span className="white-space-after">{this.props.dictionary.firstDay}</span>
 
                             <span className={this.state.validationErrors.shiftStartDateError ? "invalid" : "valid"}>
                                 {this.state.shiftStartDate ? this.state.shiftStartDate.toLocaleDateString() : this.props.dictionary.notSelected}
@@ -133,10 +156,18 @@ class Workload extends Component {
                         </p>
 
                         <p style={{textAlign: "left", marginBottom: "10px"}}>
-                            <span className="white-space-after">{this.props.dictionary.duration}:</span>
+                            <span className="white-space-after">{this.props.dictionary.duration}</span>
 
                             <span className={this.state.validationErrors.shiftDurationError ? "invalid" : "valid"}>
                                 {this.state.shiftDuration}
+                            </span>
+                        </p>
+
+                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                            <span className="white-space-after">{this.props.dictionary.daysOffDuration}</span>
+
+                            <span className={this.state.validationErrors.daysOffDurationError ? "invalid" : "valid"}>
+                                {this.state.daysOffDuration}
                             </span>
                         </p>
 
@@ -152,10 +183,12 @@ const mapStateToProps = state => {
     return {
         dictionary: {
             code: state.dictionary.data['Code'],
+            daysOffDuration: state.dictionary.data['DaysOffDuration'],
             duration: state.dictionary.data['Duration'],
             firstDay: state.dictionary.data['FirstDay'],
             months: state.dictionary.data['Months'],
             notSelected: state.dictionary.data['NotSelected'],
+            selectDaysOffDuration: state.dictionary.data['SelectDaysOffDuration'],
             selectDuration: state.dictionary.data['SelectDuration'],
             selectFirstDay: state.dictionary.data['SelectFirstDay'],
             submit: state.dictionary.data['Submit'],
