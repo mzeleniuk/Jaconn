@@ -7,8 +7,23 @@ header {
     align-items: center;
 }
 
-header img {
+header .logo-container {
+    padding: 0 15px;
+    display: flex;
+    flex-grow: 1;
+}
+
+header .logo-container img {
     height: 70px;
     width: auto;
-    flex-grow: 1;
+}
+
+header .info-modal-icon svg {
+    height: 30px;
+    width: 30px;
+    cursor: pointer;
+}
+
+header .info-modal-icon svg:hover g {
+    fill: #b2ebf9;
 }

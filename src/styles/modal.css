@@ -1,0 +1,102 @@
+.modal-open {
+    overflow: hidden;
+}
+
+.modal-open .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(3, 3, 3, 0.7);
+    z-index: 5;
+}
+
+.modal-open .modal-overlay .modal-body {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: scale(1) translate(-50%, -50%);
+    border: none;
+    outline: none;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content {
+    background-color: #050e15;
+    width: 550px;
+    border-top: 4px solid #aea1ea;
+    box-shadow: 0 8px 15px 0 rgba(0, 0, 0, 0.15);
+    padding: 25px;
+}
+
+.modal-open .modal-overlay.ReactModal__Overlay--after-open .modal-body .modal-container {
+    animation-name: zoomIn;
+    animation-duration: 0.5s;
+}
+
+.modal-open .modal-overlay.ReactModal__Overlay--after-open.ReactModal__Overlay--before-close .modal-body .modal-container {
+    animation-name: zoomOut;
+    animation-duration: 0.5s;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-header {
+    height: 30px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-header .modal-close-button {
+    width: 20px;
+    cursor: pointer;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-header .modal-close-button svg {
+    height: 20px;
+    width: 20px;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-header .modal-close-button:hover svg g {
+    stroke: #b2ebf9;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content .modal-content-wrapper {
+    max-height: 80vh;
+    position: relative;
+    overflow-y: auto;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content h2.modal-title {
+    font-size: 24px;
+    color: #ffffff;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content p.modal-message {
+    font-size: 18px;
+    color: #cccccc;
+    padding: 10px 0;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content hr {
+    height: 1px;
+    width: 50%;
+    border: none;
+    background-color: #cccccc;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content .modal-footer {
+    text-align: center;
+}
+
+.modal-open .modal-overlay .modal-body .modal-container .modal-content .modal-footer p {
+    color: #cccccc;
+    font-size: 14px;
+    font-style: italic;
+}
+
+body.mobile.modal-open .modal-overlay .modal-body .modal-container .modal-content {
+    width: 90vw;
+    padding: 10px;
+}

@@ -16,10 +16,41 @@
     }
 }
 
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+@keyframes zoomOut {
+    from {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0;
+        transform: scale3d(0.3, 0.3, 0.3);
+    }
+    to {
+        opacity: 0;
+    }
+}
+
 .fadeIn {
     animation-name: fadeIn;
 }
 
 .fadeOut {
     animation-name: fadeOut;
+}
+
+.zoomIn {
+    animation-name: zoomIn;
+}
+
+.zoomOut {
+    animation-name: zoomOut;
 }

@@ -12,6 +12,7 @@ import './styles/header.css';
 import './styles/index.css';
 import './styles/language.css';
 import './styles/loader.css';
+import './styles/modal.css';
 import './styles/workload.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
