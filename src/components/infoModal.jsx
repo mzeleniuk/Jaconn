@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Modal from 'react-modal';
 
 import { CloseIcon, InfoIcon } from '../images/icons';
+import { showLoader } from '../redux/actions';
+import { Storage } from '../services/storage';
 
 class InfoModal extends Component {
     constructor(props) {
@@ -19,6 +21,13 @@ class InfoModal extends Component {
 
     closeModal = () => {
         this.setState({ modalIsOpen: false });
+    };
+
+    resetApp = () => {
+        this.props.showLoader();
+
+        Storage.clearStorage();
+        window.location.reload();
     };
 
     render() {
@@ -58,6 +67,13 @@ class InfoModal extends Component {
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphSix}</p>
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphSeven}</p>
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphEight}</p>
+                                <p className="modal-message">{this.props.dictionary.projectInfoParagraphNine}</p>
+
+                                <div className="button-container">
+                                    <button className="button-white" onClick={this.resetApp}>
+                                        {this.props.dictionary.clearStorage}
+                                    </button>
+                                </div>
 
                                 <hr/>
 
@@ -77,6 +93,7 @@ class InfoModal extends Component {
 const mapStateToProps = state => {
     return {
         dictionary: {
+            clearStorage: state.dictionary.data['ClearStorage'],
             modalFooterPartOne: state.dictionary.data['ModalFooterPartOne'],
             modalFooterPartTwo: state.dictionary.data['ModalFooterPartTwo'],
             name: state.dictionary.data['Name'],
@@ -87,9 +104,14 @@ const mapStateToProps = state => {
             projectInfoParagraphFive: state.dictionary.data['ProjectInfoParagraphFive'],
             projectInfoParagraphSix: state.dictionary.data['ProjectInfoParagraphSix'],
             projectInfoParagraphSeven: state.dictionary.data['ProjectInfoParagraphSeven'],
-            projectInfoParagraphEight: state.dictionary.data['ProjectInfoParagraphEight']
+            projectInfoParagraphEight: state.dictionary.data['ProjectInfoParagraphEight'],
+            projectInfoParagraphNine: state.dictionary.data['ProjectInfoParagraphNine']
         }
     };
 };
 
-export default connect(mapStateToProps, null)(InfoModal);
+const mapDispatchToProps = {
+    showLoader
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(InfoModal);

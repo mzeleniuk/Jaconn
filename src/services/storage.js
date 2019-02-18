@@ -14,6 +14,11 @@ class Storage {
     static loadLanguage() {
         return localStorage.getItem('language');
     };
+
+    static clearStorage() {
+        localStorage.removeItem('workload');
+        localStorage.removeItem('language');
+    };
 }
 
 export { Storage };

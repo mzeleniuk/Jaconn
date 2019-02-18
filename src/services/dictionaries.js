@@ -1,5 +1,6 @@
 class Dictionaries {
     static EN = {
+        ClearStorage: 'Clear storage and reload',
         Code: 'EN',
         DaysOffDuration: 'Number of days off:',
         Duration: 'Shift duration (days):',
@@ -17,6 +18,7 @@ class Dictionaries {
         ProjectInfoParagraphSix: '4. Validate the selected data is correct and submit the form;',
         ProjectInfoParagraphSeven: '5. Enjoy you work schedule.',
         ProjectInfoParagraphEight: 'Please note a working schedule is built by the year of your first working day selected. To build a working schedule, for example, for 2018 - please select a first day of your working schedule in 2018.',
+        ProjectInfoParagraphNine: 'If you experience any scheduler issues please try to reset the Application data:',
         SelectDaysOffDuration: 'Select number of days off',
         SelectDuration: "Select shift's duration (days)",
         SelectFirstDay: "Select shift's first day",
@@ -28,6 +30,7 @@ class Dictionaries {
     };
 
     static UA = {
+        ClearStorage: 'Очистити дані та перезавантажити',
         Code: 'UA',
         DaysOffDuration: 'Кількість вихідних днів:',
         Duration: 'Тривалість зміни (днів):',
@@ -45,6 +48,7 @@ class Dictionaries {
         ProjectInfoParagraphSix: '4. Перевірте правильність вибраних даних та відправте форму;',
         ProjectInfoParagraphSeven: '5. Насолоджуйтесь Вашим робочим графіком.',
         ProjectInfoParagraphEight: 'Зверніть увагу, що робочий розклад формується за роком вибору першого робочого дня. Щоб сформувати робочий розклад, наприклад, за 2018 рік - будь ласка, виберіть перший день свого робочого розкладу в 2018 році.',
+        ProjectInfoParagraphNine: 'Якщо у Вас виникли проблеми з формуванням розкладу - спробуйте очистити дані сайту:',
         SelectDaysOffDuration: 'Оберіть кількість вихідних днів',
         SelectDuration: 'Оберіть тривалість зміни (днів)',
         SelectFirstDay: 'Оберіть перший день зміни',
