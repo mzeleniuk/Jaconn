@@ -20,6 +20,9 @@
     overflow: auto;
 }
 
+body.mobile .language-menu-container .language-menu-list {
+    top: 70px;
+}
 
 .language-menu-container.closed .language-menu-list {
     opacity: 0;

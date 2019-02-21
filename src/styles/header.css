@@ -7,6 +7,10 @@ header {
     align-items: center;
 }
 
+body.mobile header {
+    height: 70px;
+}
+
 header .logo-container {
     padding: 0 15px;
     display: flex;
@@ -16,6 +20,10 @@ header .logo-container {
 header .logo-container img {
     height: 70px;
     width: auto;
+}
+
+header .info-modal-icon {
+    display: flex;
 }
 
 header .info-modal-icon svg {

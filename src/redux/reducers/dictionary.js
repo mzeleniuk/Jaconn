@@ -1,11 +1,8 @@
 import { SET_DICTIONARY } from '../actionTypes';
 import { Dictionaries } from '../../services/dictionaries';
-import { Storage } from '../../services/storage';
-
-const language = Storage.loadLanguage() || navigator.language.slice(0, 2);
 
 const initialState = {
-    data: (language === 'UA' || language === 'uk') ? Dictionaries.UA : Dictionaries.EN
+    data: {}
 };
 
 export default function (state = initialState, action) {

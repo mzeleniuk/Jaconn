@@ -15,7 +15,16 @@ class Storage {
         return localStorage.getItem('language');
     };
 
+    static saveAppVersion(version) {
+        localStorage.setItem('app-version', version);
+    };
+
+    static loadAppVersion() {
+        return localStorage.getItem('app-version');
+    };
+
     static clearStorage() {
+        localStorage.removeItem('app-version');
         localStorage.removeItem('workload');
         localStorage.removeItem('language');
     };
