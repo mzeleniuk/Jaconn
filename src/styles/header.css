@@ -24,6 +24,8 @@ header .logo-container img {
 
 header .info-modal-icon {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 header .info-modal-icon svg {

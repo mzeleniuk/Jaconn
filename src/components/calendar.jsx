@@ -3,11 +3,15 @@ import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
 
 const modifiersStyles = {
+    outside: {
+        backgroundColor: 'transparent'
+    },
     today: {
         color: '#b2ebf9'
     },
-    selected: {
-        backgroundColor: '#8c54a1'
+    workingDays: {
+        backgroundColor: '#8c54a1',
+        color: '#ffffff'
     }
 };
 
@@ -100,12 +104,11 @@ class Calendar extends PureComponent {
                         month={this.props.startDate ? new Date(this.props.startDate.getFullYear(), 0) : currentCalendarYear}
                         canChangeMonth={false}
                         firstDayOfWeek={1}
-                        fixedWeeks={true}
                         locale={this.props.dictionary.code.toLowerCase()}
                         months={this.props.dictionary.months}
                         weekdaysLong={this.props.dictionary.weekdaysLong}
                         weekdaysShort={this.props.dictionary.weekdaysShort}
-                        selectedDays={this.calculateWorkingDays()}
+                        modifiers={{workingDays: this.calculateWorkingDays()}}
                         modifiersStyles={modifiersStyles}
                     />
                 </div>

@@ -11,7 +11,8 @@ const modifiersStyles = {
         color: '#b2ebf9'
     },
     selected: {
-        backgroundColor: '#8c54a1'
+        backgroundColor: '#8c54a1',
+        color: '#ffffff'
     }
 };
 
@@ -89,7 +90,7 @@ class Workload extends Component {
 
             this.props.saveWorkload(workload);
 
-            document.querySelector('.calendar').scrollIntoView({ block: 'start', behavior: 'smooth' });
+            document.querySelector('.calendar-container').scrollIntoView({ block: 'start', behavior: 'smooth' });
 
             Storage.saveWorkload(workload);
         }
@@ -113,7 +114,7 @@ class Workload extends Component {
                                    weekdaysLong={this.props.dictionary.weekdaysLong}
                                    weekdaysShort={this.props.dictionary.weekdaysShort}
                                    firstDayOfWeek={1}
-                                   fixedWeeks={true}
+                                   showOutsideDays={true}
                                    locale={this.props.dictionary.code.toLowerCase()}
                                    selectedDays={this.state.shiftStartDate}
                                    modifiersStyles={modifiersStyles}
