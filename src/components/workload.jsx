@@ -12,6 +12,7 @@ const modifiersStyles = {
     },
     selected: {
         backgroundColor: '#8c54a1',
+        backgroundImage: 'linear-gradient(to top, #8c54a1 0%, #aea1ea 100%)',
         color: '#ffffff'
     }
 };

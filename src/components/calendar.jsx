@@ -4,13 +4,15 @@ import DayPicker from 'react-day-picker';
 
 const modifiersStyles = {
     outside: {
-        backgroundColor: 'transparent'
+        backgroundColor: 'transparent',
+        backgroundImage: 'none'
     },
     today: {
         color: '#b2ebf9'
     },
     workingDays: {
         backgroundColor: '#8c54a1',
+        backgroundImage: 'linear-gradient(to top, #8c54a1 0%, #aea1ea 100%)',
         color: '#ffffff'
     }
 };
