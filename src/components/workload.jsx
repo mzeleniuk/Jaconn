@@ -72,6 +72,22 @@ class Workload extends Component {
         });
     };
 
+    disableSubmit = () => {
+        let daysOffDuration = false;
+        let shiftDuration = false;
+        let shiftStartDate = false;
+
+        try {
+            daysOffDuration = this.state.daysOffDuration && (this.state.daysOffDuration === this.props.daysOffDuration);
+            shiftDuration = this.state.shiftDuration && (this.state.shiftDuration === this.props.shiftDuration);
+            shiftStartDate = this.state.shiftStartDate && this.props.shiftStartDate && (this.state.shiftStartDate.toDateString() === this.props.shiftStartDate.toDateString());
+        } catch (e) {
+            console.error(e);
+        }
+
+        return daysOffDuration && shiftDuration && shiftStartDate;
+    };
+
     handleSubmit = () => {
         if (!this.state.daysOffDuration || !this.state.shiftDuration || !this.state.shiftStartDate) {
             this.setState({
@@ -173,7 +189,9 @@ class Workload extends Component {
                             </span>
                         </p>
 
-                        <button onClick={this.handleSubmit}>{this.props.dictionary.submit}</button>
+                        <button onClick={this.handleSubmit} disabled={this.disableSubmit()}>
+                            {this.props.dictionary.submit}
+                        </button>
                     </div>
                 </div>
             </div>
@@ -198,7 +216,10 @@ const mapStateToProps = state => {
             weekdaysLong: state.dictionary.data['WeekdaysLong'],
             weekdaysShort: state.dictionary.data['WeekdaysShort'],
             workloadSetupHeader: state.dictionary.data['WorkloadSetupHeader']
-        }
+        },
+        daysOffDuration: state.workload.data.daysOffDuration,
+        shiftDuration: state.workload.data.shiftDuration,
+        shiftStartDate: state.workload.data.shiftStartDate
     };
 };
 
