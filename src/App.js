@@ -8,7 +8,7 @@ import Workload from './components/workload';
 import { hideLoader, setDictionary, showLoader } from './redux/actions';
 import { Storage } from './services/storage';
 
-const appVersion = '1.5.1';
+const appVersion = '1.6.0';
 
 class App extends Component {
     constructor(props) {

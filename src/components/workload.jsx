@@ -3,7 +3,9 @@ import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
 
 import Dropdown from './dropdown';
+import RadioButtons from './radioButtons';
 import { saveWorkload } from '../redux/actions';
+import { Enums } from '../services/enums';
 import { Storage } from '../services/storage';
 
 const modifiersStyles = {
@@ -29,10 +31,12 @@ class Workload extends Component {
             daysOffDuration: cachedWorkload ? cachedWorkload.daysOffDuration : 3,
             shiftDuration: cachedWorkload ? cachedWorkload.shiftDuration : 3,
             shiftStartDate: cachedWorkload ? new Date(cachedWorkload.shiftStartDate) : null,
+            shiftsAlternation: cachedWorkload ? cachedWorkload.shiftsAlternation : Enums.ShiftsAlternation.None,
             validationErrors: {
                 daysOffDurationError: false,
                 shiftDurationError: false,
-                shiftStartDateError: false
+                shiftStartDateError: false,
+                shiftsAlternationError: false
             }
         };
     };
@@ -44,7 +48,8 @@ class Workload extends Component {
             const workload = {
                 daysOffDuration: cachedWorkload.daysOffDuration,
                 shiftDuration: cachedWorkload.shiftDuration,
-                shiftStartDate: new Date(cachedWorkload.shiftStartDate)
+                shiftStartDate: new Date(cachedWorkload.shiftStartDate),
+                shiftsAlternation: cachedWorkload.shiftsAlternation
             };
 
             this.props.saveWorkload(workload);
@@ -72,37 +77,48 @@ class Workload extends Component {
         });
     };
 
+    handleShiftsAlternationChange = item => {
+        this.setState({
+            shiftsAlternation: item,
+            validationErrors: { ...this.state.validationErrors, shiftsAlternationError: !item }
+        });
+    };
+
     disableSubmit = () => {
         let daysOffDuration = false;
         let shiftDuration = false;
         let shiftStartDate = false;
+        let shiftsAlternation = false;
 
         try {
             daysOffDuration = this.state.daysOffDuration && (this.state.daysOffDuration === this.props.daysOffDuration);
             shiftDuration = this.state.shiftDuration && (this.state.shiftDuration === this.props.shiftDuration);
             shiftStartDate = this.state.shiftStartDate && this.props.shiftStartDate && (this.state.shiftStartDate.toDateString() === this.props.shiftStartDate.toDateString());
+            shiftsAlternation = this.state.shiftsAlternation && (this.state.shiftsAlternation === this.props.shiftsAlternation);
         } catch (e) {
             console.error(e);
         }
 
-        return daysOffDuration && shiftDuration && shiftStartDate;
+        return daysOffDuration && shiftDuration && shiftStartDate && shiftsAlternation;
     };
 
     handleSubmit = () => {
-        if (!this.state.daysOffDuration || !this.state.shiftDuration || !this.state.shiftStartDate) {
+        if (!this.state.daysOffDuration || !this.state.shiftDuration || !this.state.shiftStartDate || !this.state.shiftsAlternation) {
             this.setState({
                 validationErrors: {
                     ...this.state.validationErrors,
                     daysOffDurationError: !this.state.daysOffDuration,
                     shiftDurationError: !this.state.shiftDuration,
-                    shiftStartDateError: !this.state.shiftStartDate
+                    shiftStartDateError: !this.state.shiftStartDate,
+                    shiftsAlternationError: !this.state.shiftsAlternation
                 }
             });
         } else {
             const workload = {
                 daysOffDuration: this.state.daysOffDuration,
                 shiftDuration: this.state.shiftDuration,
-                shiftStartDate: this.state.shiftStartDate
+                shiftStartDate: this.state.shiftStartDate,
+                shiftsAlternation: this.state.shiftsAlternation
             };
 
             this.props.saveWorkload(workload);
@@ -114,6 +130,13 @@ class Workload extends Component {
     };
 
     render() {
+        const shiftsAlternationOptions = [
+            { Name: this.props.dictionary.shiftsAlternationOptionOne, Value: Enums.ShiftsAlternation.None },
+            { Name: this.props.dictionary.shiftsAlternationOptionTwo, Value: Enums.ShiftsAlternation.StartWithDay },
+            { Name: this.props.dictionary.shiftsAlternationOptionThree, Value: Enums.ShiftsAlternation.StartWithNight }
+        ];
+        const selectedShiftsAlternation = shiftsAlternationOptions.find(item => item.Value === this.state.shiftsAlternation);
+
         return (
             <div className="workload-container">
                 <div className="workload-container-header">
@@ -161,6 +184,17 @@ class Workload extends Component {
                     </div>
 
                     <div className="data-container">
+                        <p>{this.props.dictionary.selectShiftsAlternation}</p>
+
+                        <hr />
+
+                        <RadioButtons items={shiftsAlternationOptions}
+                                      selectedItem={selectedShiftsAlternation}
+                                      handleChange={this.handleShiftsAlternationChange}
+                        />
+                    </div>
+
+                    <div className="data-container">
                         <p>{this.props.dictionary.summary}</p>
 
                         <hr />
@@ -189,6 +223,14 @@ class Workload extends Component {
                             </span>
                         </p>
 
+                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                            <span className="white-space-after">{this.props.dictionary.shiftsAlternation}</span>
+
+                            <span className={this.state.validationErrors.shiftsAlternationError ? "invalid" : "valid"}>
+                                {selectedShiftsAlternation ? selectedShiftsAlternation.Name.toLowerCase() : this.props.dictionary.notSelected}
+                            </span>
+                        </p>
+
                         <button onClick={this.handleSubmit} disabled={this.disableSubmit()}>
                             {this.props.dictionary.submit}
                         </button>
@@ -211,6 +253,11 @@ const mapStateToProps = state => {
             selectDaysOffDuration: state.dictionary.data['SelectDaysOffDuration'],
             selectDuration: state.dictionary.data['SelectDuration'],
             selectFirstDay: state.dictionary.data['SelectFirstDay'],
+            selectShiftsAlternation: state.dictionary.data['SelectShiftsAlternation'],
+            shiftsAlternation: state.dictionary.data['ShiftsAlternation'],
+            shiftsAlternationOptionOne: state.dictionary.data['ShiftsAlternationOptionOne'],
+            shiftsAlternationOptionTwo: state.dictionary.data['ShiftsAlternationOptionTwo'],
+            shiftsAlternationOptionThree: state.dictionary.data['ShiftsAlternationOptionThree'],
             submit: state.dictionary.data['Submit'],
             summary: state.dictionary.data['Summary'],
             weekdaysLong: state.dictionary.data['WeekdaysLong'],
@@ -219,7 +266,8 @@ const mapStateToProps = state => {
         },
         daysOffDuration: state.workload.data.daysOffDuration,
         shiftDuration: state.workload.data.shiftDuration,
-        shiftStartDate: state.workload.data.shiftStartDate
+        shiftStartDate: state.workload.data.shiftStartDate,
+        shiftsAlternation: state.workload.data.shiftsAlternation
     };
 };
 
