@@ -2,6 +2,8 @@ import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
 
+import { Enums } from '../services/enums';
+
 const modifiersStyles = {
     outside: {
         backgroundColor: 'transparent',
@@ -14,15 +16,26 @@ const modifiersStyles = {
         backgroundColor: '#8c54a1',
         backgroundImage: 'linear-gradient(to top, #8c54a1 0%, #aea1ea 100%)',
         color: '#ffffff'
+    },
+    dayShifts: {
+        backgroundColor: '#fab876',
+        backgroundImage: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
+        color: '#ffffff'
+    },
+    nightShifts: {
+        backgroundColor: '#234683',
+        backgroundImage: 'linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%)',
+        color: '#ffffff'
     }
 };
 
 class Calendar extends PureComponent {
     calculateWorkingDays = () => {
-        const result = [];
+        let result = {};
         const daysOffDuration = this.props.daysOffDuration;
         const duration = this.props.duration;
         const startDate = this.props.startDate;
+        const shiftsAlternation = this.props.shiftsAlternation;
 
         if (daysOffDuration && startDate && duration) {
             const startDayNumberInYear = this.getDayNumberOfYear(startDate);
@@ -62,12 +75,87 @@ class Calendar extends PureComponent {
                 b++;
             }
 
-            for (let c = 0; c < mappedPastDates.length; c++) {
-                result.push(this.getDateFromDay(targetYear, mappedPastDates[c]));
-            }
+            if (shiftsAlternation === Enums.ShiftsAlternation.StartWithDay || shiftsAlternation === Enums.ShiftsAlternation.StartWithNight) {
+                let mappedFutureDayShifts = [];
+                let mappedFutureNightShifts = [];
+                let mappedPastDayShifts = [];
+                let mappedPastNightShifts = [];
+                let dayShifts = [];
+                let nightShifts = [];
 
-            for (let d = 0; d < mappedFutureDates.length; d++) {
-                result.push(this.getDateFromDay(targetYear, mappedFutureDates[d]));
+                for (let c = 0, d = 0; c < mappedFutureDates.length; c++) {
+                    if (d < duration) {
+                        if (shiftsAlternation === Enums.ShiftsAlternation.StartWithDay) {
+                            mappedFutureDayShifts.push(mappedFutureDates[c]);
+                        } else {
+                            mappedFutureNightShifts.push(mappedFutureDates[c]);
+                        }
+                    } else {
+                        if (shiftsAlternation === Enums.ShiftsAlternation.StartWithDay) {
+                            mappedFutureNightShifts.push(mappedFutureDates[c]);
+                        } else {
+                            mappedFutureDayShifts.push(mappedFutureDates[c]);
+                        }
+
+                        if (d === (duration * 2 - 1)) {
+                            d = -1;
+                        }
+                    }
+
+                    d++;
+                }
+
+                for (let g = 0, h = 0; g < mappedPastDates.length; g++) {
+                    if (h < duration) {
+                        if (shiftsAlternation === Enums.ShiftsAlternation.StartWithDay) {
+                            mappedPastNightShifts.push(mappedPastDates[g]);
+                        } else {
+                            mappedPastDayShifts.push(mappedPastDates[g]);
+                        }
+                    } else {
+                        if (shiftsAlternation === Enums.ShiftsAlternation.StartWithDay) {
+                            mappedPastDayShifts.push(mappedPastDates[g]);
+                        } else {
+                            mappedPastNightShifts.push(mappedPastDates[g]);
+                        }
+
+                        if (h === (duration * 2 - 1)) {
+                            h = -1;
+                        }
+                    }
+
+                    h++;
+                }
+
+                for (let p = 0; p < mappedPastDayShifts.length; p++) {
+                    dayShifts.push(this.getDateFromDay(targetYear, mappedPastDayShifts[p]));
+                }
+
+                for (let r = 0; r < mappedPastNightShifts.length; r++) {
+                    nightShifts.push(this.getDateFromDay(targetYear, mappedPastNightShifts[r]));
+                }
+
+                for (let e = 0; e < mappedFutureDayShifts.length; e++) {
+                    dayShifts.push(this.getDateFromDay(targetYear, mappedFutureDayShifts[e]));
+                }
+
+                for (let f = 0; f < mappedFutureNightShifts.length; f++) {
+                    nightShifts.push(this.getDateFromDay(targetYear, mappedFutureNightShifts[f]));
+                }
+
+                result = { dayShifts: dayShifts, nightShifts: nightShifts };
+            } else {
+                let workingDays = [];
+
+                for (let x = 0; x < mappedPastDates.length; x++) {
+                    workingDays.push(this.getDateFromDay(targetYear, mappedPastDates[x]));
+                }
+
+                for (let y = 0; y < mappedFutureDates.length; y++) {
+                    workingDays.push(this.getDateFromDay(targetYear, mappedFutureDates[y]));
+                }
+
+                result = { workingDays: workingDays };
             }
         }
 
@@ -110,7 +198,7 @@ class Calendar extends PureComponent {
                         months={this.props.dictionary.months}
                         weekdaysLong={this.props.dictionary.weekdaysLong}
                         weekdaysShort={this.props.dictionary.weekdaysShort}
-                        modifiers={{workingDays: this.calculateWorkingDays()}}
+                        modifiers={this.calculateWorkingDays()}
                         modifiersStyles={modifiersStyles}
                     />
                 </div>
@@ -129,7 +217,8 @@ const mapStateToProps = state => {
         },
         daysOffDuration: state.workload.data.daysOffDuration,
         duration: state.workload.data.shiftDuration,
-        startDate: state.workload.data.shiftStartDate
+        startDate: state.workload.data.shiftStartDate,
+        shiftsAlternation: state.workload.data.shiftsAlternation
     };
 };
 
