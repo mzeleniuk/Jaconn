@@ -68,6 +68,7 @@ class InfoModal extends Component {
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphSeven}</p>
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphEight}</p>
                                 <p className="modal-message">{this.props.dictionary.projectInfoParagraphNine}</p>
+                                <p className="modal-message">{this.props.dictionary.projectInfoParagraphTen}</p>
 
                                 <div className="button-container">
                                     <button className="button-white" onClick={this.resetApp}>
@@ -105,7 +106,8 @@ const mapStateToProps = state => {
             projectInfoParagraphSix: state.dictionary.data['ProjectInfoParagraphSix'],
             projectInfoParagraphSeven: state.dictionary.data['ProjectInfoParagraphSeven'],
             projectInfoParagraphEight: state.dictionary.data['ProjectInfoParagraphEight'],
-            projectInfoParagraphNine: state.dictionary.data['ProjectInfoParagraphNine']
+            projectInfoParagraphNine: state.dictionary.data['ProjectInfoParagraphNine'],
+            projectInfoParagraphTen: state.dictionary.data['ProjectInfoParagraphTen']
         }
     };
 };

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import DayPicker from 'react-day-picker';
 
@@ -231,6 +231,20 @@ class Workload extends Component {
                             </span>
                         </p>
 
+                        {this.state.shiftsAlternation === Enums.ShiftsAlternation.StartWithDay || this.state.shiftsAlternation === Enums.ShiftsAlternation.StartWithNight ? (
+                            <Fragment>
+                                <div className="working-days-marker">
+                                    <span>{this.props.dictionary.workingDaysMarkerExample}</span>
+                                    <div className="day-marker" />
+                                </div>
+
+                                <div className="working-days-marker">
+                                    <span>{this.props.dictionary.workingNightsMarkerExample}</span>
+                                    <div className="night-marker" />
+                                </div>
+                            </Fragment>
+                        ) : null}
+
                         <button onClick={this.handleSubmit} disabled={this.disableSubmit()}>
                             {this.props.dictionary.submit}
                         </button>
@@ -262,6 +276,8 @@ const mapStateToProps = state => {
             summary: state.dictionary.data['Summary'],
             weekdaysLong: state.dictionary.data['WeekdaysLong'],
             weekdaysShort: state.dictionary.data['WeekdaysShort'],
+            workingDaysMarkerExample: state.dictionary.data['WorkingDaysMarkerExample'],
+            workingNightsMarkerExample: state.dictionary.data['WorkingNightsMarkerExample'],
             workloadSetupHeader: state.dictionary.data['WorkloadSetupHeader']
         },
         daysOffDuration: state.workload.data.daysOffDuration,

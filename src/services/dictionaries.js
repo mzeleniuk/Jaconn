@@ -15,10 +15,11 @@ class Dictionaries {
         ProjectInfoParagraphThree: '1. Select any first day of your working schedule in our user-friendly day-picker;',
         ProjectInfoParagraphFour: '2. Select the duration of your working shift (in days);',
         ProjectInfoParagraphFive: '3. Select the duration of your days-off (in days);',
-        ProjectInfoParagraphSix: '4. Validate the selected data is correct and submit the form;',
-        ProjectInfoParagraphSeven: '5. Enjoy you work schedule.',
-        ProjectInfoParagraphEight: 'Please note a working schedule is built by the year of your first working day selected. To build a working schedule, for example, for 2018 - please select a first day of your working schedule in 2018.',
-        ProjectInfoParagraphNine: 'If you experience any scheduler issues please try to reset the Application data:',
+        ProjectInfoParagraphSix: '4. Select the alternation of working shifts;',
+        ProjectInfoParagraphSeven: '5. Validate the selected data is correct and submit the form;',
+        ProjectInfoParagraphEight: '6. Enjoy you work schedule.',
+        ProjectInfoParagraphNine: 'Please note a working schedule is built by the year of your first working day selected. To build a working schedule, for example, for 2018 - please select a first day of your working schedule in 2018.',
+        ProjectInfoParagraphTen: 'If you experience any scheduler issues please try to reset the Application data:',
         SelectDaysOffDuration: 'Select number of days off',
         SelectDuration: "Select shift's duration (days)",
         SelectFirstDay: "Select shift's first day",
@@ -31,6 +32,8 @@ class Dictionaries {
         Summary: 'Summary',
         WeekdaysLong: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
         WeekdaysShort: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'],
+        WorkingDaysMarkerExample: 'Working days will be marked as:',
+        WorkingNightsMarkerExample: 'Working nights will be marked as:',
         WorkloadSetupHeader: 'Workload setup'
     };
 
@@ -50,10 +53,11 @@ class Dictionaries {
         ProjectInfoParagraphThree: '1. Виберіть будь-який перший день свого робочого графіка в нашому зручному календарі;',
         ProjectInfoParagraphFour: '2. Виберіть тривалість робочої зміни (у днях);',
         ProjectInfoParagraphFive: '3. Виберіть тривалість вихідних днів (у днях);',
-        ProjectInfoParagraphSix: '4. Перевірте правильність вибраних даних та відправте форму;',
-        ProjectInfoParagraphSeven: '5. Насолоджуйтесь Вашим робочим графіком.',
-        ProjectInfoParagraphEight: 'Зверніть увагу, що робочий розклад формується за роком вибору першого робочого дня. Щоб сформувати робочий розклад, наприклад, за 2018 рік - будь ласка, виберіть перший день свого робочого розкладу в 2018 році.',
-        ProjectInfoParagraphNine: 'Якщо у Вас виникли проблеми з формуванням розкладу - спробуйте очистити дані сайту:',
+        ProjectInfoParagraphSix: '4. Виберіть режим чергування робочих змін;',
+        ProjectInfoParagraphSeven: '5. Перевірте правильність вибраних даних та відправте форму;',
+        ProjectInfoParagraphEight: '6. Насолоджуйтесь Вашим робочим графіком.',
+        ProjectInfoParagraphNine: 'Зверніть увагу, що робочий розклад формується за роком вибору першого робочого дня. Щоб сформувати робочий розклад, наприклад, за 2018 рік - будь ласка, виберіть перший день свого робочого розкладу в 2018 році.',
+        ProjectInfoParagraphTen: 'Якщо у Вас виникли проблеми з формуванням розкладу - спробуйте очистити дані сайту:',
         SelectDaysOffDuration: 'Оберіть кількість вихідних днів',
         SelectDuration: 'Оберіть тривалість зміни (днів)',
         SelectFirstDay: 'Оберіть перший день зміни',
@@ -66,6 +70,8 @@ class Dictionaries {
         Summary: 'Огляд',
         WeekdaysLong: ['Неділя', 'Понеділок', 'Вівторок', 'Середа', 'Четвер', "П'ятниця", 'Субота'],
         WeekdaysShort: ['Нд', 'Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб'],
+        WorkingDaysMarkerExample: 'Так будуть позначені денні зміни:',
+        WorkingNightsMarkerExample: 'Так будуть позначені нічні зміни:',
         WorkloadSetupHeader: 'Налаштування робочої зміни'
     };
 }
