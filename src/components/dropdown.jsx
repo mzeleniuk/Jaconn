@@ -8,9 +8,12 @@ class Dropdown extends Component {
             menuClass: 'closed',
             menuOpen: false
         };
+
+        this.showDropdownMenu = this.showDropdownMenu.bind(this);
+        this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
     };
 
-    showDropdownMenu = event => {
+    showDropdownMenu(event) {
         event.preventDefault();
 
         this.setState({ menuClass: 'opened', menuOpen: true }, () => {
@@ -18,7 +21,7 @@ class Dropdown extends Component {
         });
     };
 
-    hideDropdownMenu = () => {
+    hideDropdownMenu() {
         this.setState({ menuClass: 'closed' }, () => {
             document.removeEventListener('click', this.hideDropdownMenu);
 
@@ -28,7 +31,7 @@ class Dropdown extends Component {
         });
     };
 
-    handleSelect = item => {
+    handleSelect(item) {
         this.props.handleItemSelect(item);
     };
 

@@ -13,17 +13,21 @@ class InfoModal extends Component {
         this.state = {
             modalIsOpen: false
         };
+
+        this.openModal = this.openModal.bind(this);
+        this.closeModal = this.closeModal.bind(this);
+        this.resetApp = this.resetApp.bind(this);
     };
 
-    openModal = () => {
+    openModal() {
         this.setState({ modalIsOpen: true });
     };
 
-    closeModal = () => {
+    closeModal() {
         this.setState({ modalIsOpen: false });
     };
 
-    resetApp = () => {
+    resetApp() {
         this.props.showLoader();
 
         Storage.clearStorage();

@@ -12,9 +12,12 @@ class Language extends Component {
             menuClass: 'closed',
             menuOpen: false
         };
+
+        this.showDropdownMenu = this.showDropdownMenu.bind(this);
+        this.hideDropdownMenu = this.hideDropdownMenu.bind(this);
     };
 
-    showDropdownMenu = event => {
+    showDropdownMenu(event) {
         event.preventDefault();
 
         this.setState({ menuClass: 'opened', menuOpen: true }, () => {
@@ -22,7 +25,7 @@ class Language extends Component {
         });
     };
 
-    hideDropdownMenu = () => {
+    hideDropdownMenu() {
         this.setState({ menuClass: 'closed' }, () => {
             document.removeEventListener('click', this.hideDropdownMenu);
 
@@ -32,7 +35,7 @@ class Language extends Component {
         });
     };
 
-    handleSelect = item => {
+    handleSelect(item) {
         this.props.setDictionary(item);
         Storage.saveLanguage(item);
     };

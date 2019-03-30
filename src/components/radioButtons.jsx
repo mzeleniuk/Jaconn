@@ -1,15 +1,21 @@
 import React, { PureComponent } from 'react';
 
 class RadioButtons extends PureComponent {
-    handleChange = event => {
+    constructor(props) {
+        super(props);
+
+        this.handleChange = this.handleChange.bind(this);
+    };
+
+    handleChange(event) {
         this.props.handleChange(event.currentTarget.value);
     };
 
-    handleSelect = item => {
+    handleSelect(item) {
         this.props.handleChange(item.Value);
     };
 
-    getSelectedValue = () => {
+    getSelectedValue() {
         return this.props.selectedItem ? this.props.selectedItem.Value : null;
     };
 

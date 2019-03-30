@@ -39,6 +39,12 @@ class Workload extends Component {
                 shiftsAlternationError: false
             }
         };
+
+        this.handleDayClick = this.handleDayClick.bind(this);
+        this.handleItemChange = this.handleItemChange.bind(this);
+        this.handleDaysOffDurationChange = this.handleDaysOffDurationChange.bind(this);
+        this.handleShiftsAlternationChange = this.handleShiftsAlternationChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     };
 
     componentDidMount() {
@@ -56,35 +62,35 @@ class Workload extends Component {
         }
     };
 
-    handleDayClick = day => {
+    handleDayClick(day) {
         this.setState({
             shiftStartDate: day,
             validationErrors: { ...this.state.validationErrors, shiftStartDateError: !day }
         });
     };
 
-    handleItemChange = item => {
+    handleItemChange(item) {
         this.setState({
             shiftDuration: item,
             validationErrors: { ...this.state.validationErrors, shiftDurationError: !item }
         });
     };
 
-    handleDaysOffDurationChange = item => {
+    handleDaysOffDurationChange(item) {
         this.setState({
             daysOffDuration: item,
             validationErrors: { ...this.state.validationErrors, daysOffDurationError: !item }
         });
     };
 
-    handleShiftsAlternationChange = item => {
+    handleShiftsAlternationChange(item) {
         this.setState({
             shiftsAlternation: item,
             validationErrors: { ...this.state.validationErrors, shiftsAlternationError: !item }
         });
     };
 
-    disableSubmit = () => {
+    disableSubmit() {
         let daysOffDuration = false;
         let shiftDuration = false;
         let shiftStartDate = false;
@@ -102,7 +108,7 @@ class Workload extends Component {
         return daysOffDuration && shiftDuration && shiftStartDate && shiftsAlternation;
     };
 
-    handleSubmit = () => {
+    handleSubmit() {
         if (!this.state.daysOffDuration || !this.state.shiftDuration || !this.state.shiftStartDate || !this.state.shiftsAlternation) {
             this.setState({
                 validationErrors: {

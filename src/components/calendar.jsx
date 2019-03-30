@@ -30,7 +30,7 @@ const modifiersStyles = {
 };
 
 class Calendar extends PureComponent {
-    calculateWorkingDays = () => {
+    calculateWorkingDays() {
         let result = {};
         const daysOffDuration = this.props.daysOffDuration;
         const duration = this.props.duration;
@@ -38,9 +38,9 @@ class Calendar extends PureComponent {
         const shiftsAlternation = this.props.shiftsAlternation;
 
         if (daysOffDuration && startDate && duration) {
-            const startDayNumberInYear = this.getDayNumberOfYear(startDate);
+            const startDayNumberInYear = Calendar.getDayNumberOfYear(startDate);
             const targetYear = startDate.getFullYear();
-            const daysOfYear = this.getDaysOfYear(targetYear);
+            const daysOfYear = Calendar.getDaysOfYear(targetYear);
 
             let futureDates = [];
             let pastDates = [];
@@ -128,19 +128,19 @@ class Calendar extends PureComponent {
                 }
 
                 for (let p = 0; p < mappedPastDayShifts.length; p++) {
-                    dayShifts.push(this.getDateFromDay(targetYear, mappedPastDayShifts[p]));
+                    dayShifts.push(Calendar.getDateFromDay(targetYear, mappedPastDayShifts[p]));
                 }
 
                 for (let r = 0; r < mappedPastNightShifts.length; r++) {
-                    nightShifts.push(this.getDateFromDay(targetYear, mappedPastNightShifts[r]));
+                    nightShifts.push(Calendar.getDateFromDay(targetYear, mappedPastNightShifts[r]));
                 }
 
                 for (let e = 0; e < mappedFutureDayShifts.length; e++) {
-                    dayShifts.push(this.getDateFromDay(targetYear, mappedFutureDayShifts[e]));
+                    dayShifts.push(Calendar.getDateFromDay(targetYear, mappedFutureDayShifts[e]));
                 }
 
                 for (let f = 0; f < mappedFutureNightShifts.length; f++) {
-                    nightShifts.push(this.getDateFromDay(targetYear, mappedFutureNightShifts[f]));
+                    nightShifts.push(Calendar.getDateFromDay(targetYear, mappedFutureNightShifts[f]));
                 }
 
                 result = { dayShifts: dayShifts, nightShifts: nightShifts };
@@ -148,11 +148,11 @@ class Calendar extends PureComponent {
                 let workingDays = [];
 
                 for (let x = 0; x < mappedPastDates.length; x++) {
-                    workingDays.push(this.getDateFromDay(targetYear, mappedPastDates[x]));
+                    workingDays.push(Calendar.getDateFromDay(targetYear, mappedPastDates[x]));
                 }
 
                 for (let y = 0; y < mappedFutureDates.length; y++) {
-                    workingDays.push(this.getDateFromDay(targetYear, mappedFutureDates[y]));
+                    workingDays.push(Calendar.getDateFromDay(targetYear, mappedFutureDates[y]));
                 }
 
                 result = { workingDays: workingDays };
@@ -162,7 +162,7 @@ class Calendar extends PureComponent {
         return result;
     };
 
-    getDayNumberOfYear = (date) => {
+    static getDayNumberOfYear(date) {
         const start = new Date(date.getFullYear(), 0, 0);
         const diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
         const oneDay = 1000 * 60 * 60 * 24;
@@ -170,13 +170,13 @@ class Calendar extends PureComponent {
         return Math.floor(diff / oneDay);
     };
 
-    getDaysOfYear = (year) => {
+    static getDaysOfYear(year) {
         const leapYear = year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0);
 
         return leapYear ? 366 : 365;
     };
 
-    getDateFromDay = (year, day) => {
+    static getDateFromDay(year, day) {
         const date = new Date(year, 0);
 
         return new Date(date.setDate(day));
