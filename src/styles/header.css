@@ -37,3 +37,13 @@ header .info-modal-icon svg {
 header .info-modal-icon svg:hover g {
     fill: #b2ebf9;
 }
+
+header .logo-container, header .info-modal-icon, header .language-menu-container {
+    z-index: 1;
+}
+
+header img.winter-holidays {
+    position: absolute;
+    top: 0;
+    height: 70px;
+}
