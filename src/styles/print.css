@@ -1,0 +1,38 @@
+@media print {
+    @page {
+        size: A4;
+        margin: 10mm;
+    }
+
+    body {
+        background: none;
+    }
+
+    body header, body .workload-container, body .ReactModalPortal {
+        display: none;
+        visibility: hidden;
+    }
+
+    body .calendar-container .calendar, body .calendar-container .calendar .DayPicker .DayPicker-wrapper {
+        padding: 0;
+    }
+
+    body .calendar-container .calendar .DayPicker {
+        font-size: 10pt;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month {
+        margin: 5pt 5pt 0 5pt;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month {
+        color: darkgray;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--workingDays,
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--dayShifts,
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--nightShifts {
+        font-weight: bold;
+        text-decoration: underline;
+    }
+}

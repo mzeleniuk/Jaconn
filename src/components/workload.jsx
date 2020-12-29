@@ -251,9 +251,11 @@ class Workload extends Component {
                             </Fragment>
                         ) : null}
 
-                        <button onClick={this.handleSubmit} disabled={this.disableSubmit()}>
+                        <button type="button" onClick={this.handleSubmit} disabled={this.disableSubmit()}>
                             {this.props.dictionary.submit}
                         </button>
+
+                        <p className="link" onClick={window.print}>{this.props.dictionary.print}</p>
                     </div>
                 </div>
             </div>
@@ -270,6 +272,7 @@ const mapStateToProps = state => {
             firstDay: state.dictionary.data['FirstDay'],
             months: state.dictionary.data['Months'],
             notSelected: state.dictionary.data['NotSelected'],
+            print: state.dictionary.data['Print'],
             selectDaysOffDuration: state.dictionary.data['SelectDaysOffDuration'],
             selectDuration: state.dictionary.data['SelectDuration'],
             selectFirstDay: state.dictionary.data['SelectFirstDay'],

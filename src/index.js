@@ -13,6 +13,7 @@ import './styles/index.css';
 import './styles/language.css';
 import './styles/loader.css';
 import './styles/modal.css';
+import './styles/print.css';
 import './styles/radioButtons.css';
 import './styles/workload.css';
 import App from './App';
