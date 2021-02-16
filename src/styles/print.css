@@ -32,7 +32,21 @@
     body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--workingDays,
     body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--dayShifts,
     body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--nightShifts {
+        background: transparent !important;
         font-weight: bold;
         text-decoration: underline;
+        text-shadow: 0 0 black;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--workingDays {
+        color: rgb(140, 84, 161) !important;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--dayShifts {
+        color: rgb(250, 184, 118) !important;
+    }
+
+    body .calendar-container .calendar .DayPicker .DayPicker-wrapper .DayPicker-Month .DayPicker-Day--nightShifts {
+        color: rgb(35, 70, 131) !important;
     }
 }
