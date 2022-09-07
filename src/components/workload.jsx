@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import DayPicker from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
+import { enUS, uk } from 'date-fns/locale';
 
 import Dropdown from './dropdown';
 import RadioButtons from './radioButtons';
@@ -9,12 +10,16 @@ import { Enums } from '../services/enums';
 import { Storage } from '../services/storage';
 
 const modifiersStyles = {
+    outside: {
+        color: '#cccccc'
+    },
     today: {
         color: '#b2ebf9'
     },
     selected: {
         backgroundColor: '#8c54a1',
         backgroundImage: 'linear-gradient(to top, #8c54a1 0%, #aea1ea 100%)',
+        border: 'none',
         color: '#ffffff'
     }
 };
@@ -135,6 +140,10 @@ class Workload extends Component {
         }
     };
 
+    getLocale() {
+        return this.props.dictionary.code.toUpperCase() === "UA" ? uk : enUS;
+    };
+
     render() {
         const shiftsAlternationOptions = [
             { Name: this.props.dictionary.shiftsAlternationOptionOne, Value: Enums.ShiftsAlternation.None },
@@ -155,15 +164,14 @@ class Workload extends Component {
 
                         <hr />
 
-                        <DayPicker onDayClick={this.handleDayClick}
-                                   months={this.props.dictionary.months}
-                                   weekdaysLong={this.props.dictionary.weekdaysLong}
-                                   weekdaysShort={this.props.dictionary.weekdaysShort}
-                                   firstDayOfWeek={1}
-                                   showOutsideDays={true}
-                                   locale={this.props.dictionary.code.toLowerCase()}
-                                   selectedDays={this.state.shiftStartDate}
-                                   modifiersStyles={modifiersStyles}
+                        <DayPicker
+                            onDayClick={this.handleDayClick}
+                            showOutsideDays={true}
+                            locale={this.getLocale()}
+                            selected={this.state.shiftStartDate}
+                            style={{ display: "flex", justifyContent: "center" }}
+                            modifiersStyles={modifiersStyles}
+                            weekStartsOn={1}
                         />
                     </div>
 
@@ -172,9 +180,10 @@ class Workload extends Component {
 
                         <hr />
 
-                        <Dropdown list={duration}
-                                  selectedItem={this.state.shiftDuration}
-                                  handleItemSelect={this.handleItemChange}
+                        <Dropdown
+                            list={duration}
+                            selectedItem={this.state.shiftDuration}
+                            handleItemSelect={this.handleItemChange}
                         />
                     </div>
 
@@ -183,9 +192,10 @@ class Workload extends Component {
 
                         <hr />
 
-                        <Dropdown list={duration}
-                                  selectedItem={this.state.daysOffDuration}
-                                  handleItemSelect={this.handleDaysOffDurationChange}
+                        <Dropdown
+                            list={duration}
+                            selectedItem={this.state.daysOffDuration}
+                            handleItemSelect={this.handleDaysOffDurationChange}
                         />
                     </div>
 
@@ -194,9 +204,10 @@ class Workload extends Component {
 
                         <hr />
 
-                        <RadioButtons items={shiftsAlternationOptions}
-                                      selectedItem={selectedShiftsAlternation}
-                                      handleChange={this.handleShiftsAlternationChange}
+                        <RadioButtons
+                            items={shiftsAlternationOptions}
+                            selectedItem={selectedShiftsAlternation}
+                            handleChange={this.handleShiftsAlternationChange}
                         />
                     </div>
 
@@ -205,7 +216,7 @@ class Workload extends Component {
 
                         <hr />
 
-                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                        <p style={{ textAlign: "left", marginBottom: "10px" }}>
                             <span className="white-space-after">{this.props.dictionary.firstDay}</span>
 
                             <span className={this.state.validationErrors.shiftStartDateError ? "invalid" : "valid"}>
@@ -213,7 +224,7 @@ class Workload extends Component {
                             </span>
                         </p>
 
-                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                        <p style={{ textAlign: "left", marginBottom: "10px" }}>
                             <span className="white-space-after">{this.props.dictionary.duration}</span>
 
                             <span className={this.state.validationErrors.shiftDurationError ? "invalid" : "valid"}>
@@ -221,7 +232,7 @@ class Workload extends Component {
                             </span>
                         </p>
 
-                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                        <p style={{ textAlign: "left", marginBottom: "10px" }}>
                             <span className="white-space-after">{this.props.dictionary.daysOffDuration}</span>
 
                             <span className={this.state.validationErrors.daysOffDurationError ? "invalid" : "valid"}>
@@ -229,7 +240,7 @@ class Workload extends Component {
                             </span>
                         </p>
 
-                        <p style={{textAlign: "left", marginBottom: "10px"}}>
+                        <p style={{ textAlign: "left", marginBottom: "10px" }}>
                             <span className="white-space-after">{this.props.dictionary.shiftsAlternation}</span>
 
                             <span className={this.state.validationErrors.shiftsAlternationError ? "invalid" : "valid"}>
@@ -251,7 +262,8 @@ class Workload extends Component {
                             </Fragment>
                         ) : null}
 
-                        <button type="button" onClick={this.handleSubmit} disabled={this.disableSubmit()}>
+                        <button type="button" className="button-primary" onClick={this.handleSubmit}
+                            disabled={this.disableSubmit()}>
                             {this.props.dictionary.submit}
                         </button>
 

@@ -6,3 +6,12 @@
 .calendar-container .calendar {
     padding: 10px;
 }
+
+.calendar-container .calendar .rdp-months {
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.calendar-container .calendar .rdp-months .rdp-month {
+    margin: 0;
+}

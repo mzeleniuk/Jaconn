@@ -1,0 +1,12 @@
+import './animations.css';
+import './buttons.css';
+import './calendar.css';
+import './dropdown.css';
+import './header.css';
+import './index.css';
+import './language.css';
+import './loader.css';
+import './modal.css';
+import './print.css';
+import './radioButtons.css';
+import './workload.css';

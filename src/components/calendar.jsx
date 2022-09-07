@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-import DayPicker from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
+import { enUS, uk } from 'date-fns/locale';
 
 import { Enums } from '../services/enums';
 
@@ -15,16 +16,19 @@ const modifiersStyles = {
     workingDays: {
         backgroundColor: '#8c54a1',
         backgroundImage: 'linear-gradient(to top, #8c54a1 0%, #aea1ea 100%)',
+        border: 'none',
         color: '#ffffff'
     },
     dayShifts: {
         backgroundColor: '#fab876',
         backgroundImage: 'linear-gradient(120deg, #f6d365 0%, #fda085 100%)',
+        border: 'none',
         color: '#ffffff'
     },
     nightShifts: {
         backgroundColor: '#234683',
         backgroundImage: 'linear-gradient(to top, #1e3c72 0%, #1e3c72 1%, #2a5298 100%)',
+        border: 'none',
         color: '#ffffff'
     }
 };
@@ -162,6 +166,10 @@ class Calendar extends PureComponent {
         return result;
     };
 
+    getLocale() {
+        return this.props.dictionary.code.toUpperCase() === "UA" ? uk : enUS;
+    };
+
     static getDayNumberOfYear(date) {
         const start = new Date(date.getFullYear(), 0, 0);
         const diff = (date - start) + ((start.getTimezoneOffset() - date.getTimezoneOffset()) * 60 * 1000);
@@ -190,16 +198,15 @@ class Calendar extends PureComponent {
             <div className="calendar-container">
                 <div className="calendar">
                     <DayPicker
+                        fixedWeeks={true}
                         numberOfMonths={12}
                         month={this.props.startDate ? new Date(this.props.startDate.getFullYear(), 0) : currentCalendarYear}
-                        canChangeMonth={false}
-                        firstDayOfWeek={1}
-                        locale={this.props.dictionary.code.toLowerCase()}
-                        months={this.props.dictionary.months}
-                        weekdaysLong={this.props.dictionary.weekdaysLong}
-                        weekdaysShort={this.props.dictionary.weekdaysShort}
+                        disableNavigation={true}
+                        locale={this.getLocale()}
                         modifiers={this.calculateWorkingDays()}
                         modifiersStyles={modifiersStyles}
+                        showWeekNumber={true}
+                        weekStartsOn={1}
                     />
                 </div>
             </div>

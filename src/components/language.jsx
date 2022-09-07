@@ -18,7 +18,7 @@ class Language extends Component {
     };
 
     showDropdownMenu(event) {
-        event.preventDefault();
+        event.stopPropagation();
 
         this.setState({ menuClass: 'opened', menuOpen: true }, () => {
             document.addEventListener('click', this.hideDropdownMenu);
@@ -53,7 +53,7 @@ class Language extends Component {
                     <div className="language-menu-list">
                         {languages.map(item => {
                             return (
-                                <div className="language-menu-list-item" key={item} onClick={() => this.handleSelect(item)}>
+                                <div className="language-menu-list-item" key={item} onClick={this.handleSelect.bind(this, item)}>
                                     {item}
                                 </div>
                             );

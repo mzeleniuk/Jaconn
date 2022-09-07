@@ -14,7 +14,7 @@ class Dropdown extends Component {
     };
 
     showDropdownMenu(event) {
-        event.preventDefault();
+        event.stopPropagation();
 
         this.setState({ menuClass: 'opened', menuOpen: true }, () => {
             document.addEventListener('click', this.hideDropdownMenu);
@@ -48,7 +48,7 @@ class Dropdown extends Component {
                     <div className="dropdown-list">
                         {this.props.list.map(item => {
                             return (
-                                <div className="dropdown-list-item" key={item} onClick={() => this.handleSelect(item)}>
+                                <div className="dropdown-list-item" key={item} onClick={this.handleSelect.bind(this, item)}>
                                     <span className={`${this.props.selectedItem === item ? "selected" : "item"}`}>
                                         {item}
                                     </span>
