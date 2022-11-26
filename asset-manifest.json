@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/Jaconn/static/css/main.c3287122.css",
-    "main.js": "/Jaconn/static/js/main.9d8d7524.js",
+    "main.js": "/Jaconn/static/js/main.fec33b1e.js",
     "static/media/background.png": "/Jaconn/static/media/background.a25e895f94707971ea07.png",
     "static/media/trees.svg": "/Jaconn/static/media/trees.0a5eb6109100e8a1f1e8053ee15a8135.svg",
     "index.html": "/Jaconn/index.html",
     "static/media/logo.svg": "/Jaconn/static/media/logo.6bfbe0a77714108c00e482aec5c57d61.svg",
     "main.c3287122.css.map": "/Jaconn/static/css/main.c3287122.css.map",
-    "main.9d8d7524.js.map": "/Jaconn/static/js/main.9d8d7524.js.map"
+    "main.fec33b1e.js.map": "/Jaconn/static/js/main.fec33b1e.js.map"
   },
   "entrypoints": [
     "static/css/main.c3287122.css",
-    "static/js/main.9d8d7524.js"
+    "static/js/main.fec33b1e.js"
   ]
 }
