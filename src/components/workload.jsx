@@ -14,7 +14,7 @@ const modifiersStyles = {
         color: '#cccccc'
     },
     today: {
-        color: '#b2ebf9'
+        color: '#ff3b30'
     },
     selected: {
         backgroundColor: '#8c54a1',

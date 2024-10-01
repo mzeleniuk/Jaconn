@@ -6,7 +6,7 @@ class Dictionaries {
         Duration: 'Shift duration (days):',
         FirstDay: 'Shift first day:',
         ModalFooterPartOne: 'For my little sister,',
-        ModalFooterPartTwo: 'Michael Zeleniuk | 2019',
+        ModalFooterPartTwo: 'Mykhailo Zeleniuk | 2019',
         Months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
         Name: 'Jaconn',
         NotSelected: 'not selected',

@@ -21,3 +21,11 @@ h1, h2, h3, h4, h5, h6, p {
     margin: 0;
     padding: 0;
 }
+
+.rdp-caption_label {
+    font-size: 22px;
+}
+
+.rdp-day_today:not(.rdp-day_outside) {
+    color: #ff3b30 !important;
+}
